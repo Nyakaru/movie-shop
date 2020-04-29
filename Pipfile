@@ -12,6 +12,7 @@ djangorestframework = "*"
 pyjwt = "*"
 drf-yasg = "==1.17.0"
 django-rest-swagger = "==2.2.0"
+psycopg2 = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.7"
