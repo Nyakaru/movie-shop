@@ -1,5 +1,6 @@
 from rest_framework.response import Response
 from rest_framework import generics, mixins
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import ProductCategory, Products
 from .serializers import ProductCategorySerializer, ProductSerializer
@@ -8,7 +9,7 @@ from .validators import validate_category, validate_product
 class ProductCategoryView(generics.ListCreateAPIView):
     serializer_class = ProductCategorySerializer
     queryset = ProductCategory.objects.all()
-    
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     def post(self, request):
         category = request.data
 
@@ -20,6 +21,7 @@ class ProductCategoryView(generics.ListCreateAPIView):
 
 class SingleProductCategoryView(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.DestroyModelMixin, mixins.UpdateModelMixin):
     serializer_class = ProductCategorySerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get(self, request, category_id):
         
@@ -44,7 +46,8 @@ class SingleProductCategoryView(generics.GenericAPIView, mixins.RetrieveModelMix
 class ProductView(generics.ListCreateAPIView):
     serializer_class = ProductSerializer
     queryset = Products.objects.all()
-    
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+
     def post(self, request):
         product = request.data
 
@@ -56,6 +59,7 @@ class ProductView(generics.ListCreateAPIView):
 
 class SingleProductView(generics.GenericAPIView, mixins.RetrieveModelMixin, mixins.DestroyModelMixin, mixins.UpdateModelMixin):
     serializer_class = ProductSerializer
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get(self, request, product_id):
         
